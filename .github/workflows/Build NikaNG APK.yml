@@ -27,9 +27,7 @@ jobs:
         repository: 'mahsanet/NikaNG'
 
     - name: download latest Mahsa-core aar
-    - name: 📱 Setup Android environment
       uses: robinraju/release-downloader@v1
-      uses: android-actions/setup-android@v3
       with:
         repository: 'GFW-knocker/AndroidLibXrayLite'
         latest: true
