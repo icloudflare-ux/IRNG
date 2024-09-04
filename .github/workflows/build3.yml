@@ -41,34 +41,25 @@ jobs:
         ENCODED_KEYSTORE: ${{ secrets.KEYSTORE }}
       run: |
         echo $ENCODED_KEYSTORE | base64 -di > keystore.jks
-
-
     - name: Build Unsiged APK
       run: |
         cd ${{ github.workspace }}/V2rayNG
         chmod 755 gradlew
         ./gradlew assembleRelease
-
-
     - name: check filenames
       run: |
         cd ${{ github.workspace }}/V2rayNG/app/build/outputs/apk/release/
         ls
-
-
-    - name: Sign app APK
-      uses: ilharp/sign-android-release@v1    
-      # ID used to access action output
-      #id: sign_app
+    - name: 🔐 Sign APK files
+      uses: ilharp/sign-android-release@v1
       with:
-        releaseDirectory: V2rayNG/app/build/outputs/apk/release/
-        signingKeyBase64: ${{ secrets.KEYSTORE }}
-        alias: ${{ secrets.ALIAS }}
-        keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
-        keyPassword: ${{ secrets.KEY_PASSWORD }}
-      env:
-        # override default build-tools version (33.0.0) -- optional
-        BUILD_TOOLS_VERSION: "34.0.0"
+        releaseDir: V2rayNG/app/build/outputs/apk/release/
+        signingKey: ${{ secrets.SIGNING_KEY }}
+        keyAlias: ${{ secrets.SIGNING_KEY_ALIAS }}
+        keyStorePassword: ${{ secrets.SIGNING_STORE_PASSWORD }}
+        keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
+        buildToolsVersion: 34.0.0
+
 
 
     - name: check filenames
