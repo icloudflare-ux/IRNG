@@ -1,34 +1,35 @@
-name: Build Release APK
+name: Build NikaNG APK
+
+permissions:
+  contents: write
 
 on:
   workflow_dispatch:
     inputs:
-      release_tag:
+      NikaNG_VERSION:
+        description: 'NikaNG version'
+        required: true
+
+      XRAY_VERSION:
+        description: "Fill in Xray-core's commit hash or short hash. Default: HEAD~0 (latest commit)."
         required: true
         type: string
-
+        default: 'HEAD~0'
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
+    - name: 🛠️ Checkout NikaNG repo
       uses: actions/checkout@v4
-
-    - name: Setup Java
-      uses: actions/setup-java@v4
       with:
-        distribution: 'temurin'
-        java-version: '17'
-
-    
-    - name: Setup Android environment
-      uses: android-actions/setup-android@v3
-
+        repository: 'mahsanet/NikaNG'
 
     - name: download latest Mahsa-core aar
+    - name: 📱 Setup Android environment
       uses: robinraju/release-downloader@v1
+      uses: android-actions/setup-android@v3
       with:
         repository: 'GFW-knocker/AndroidLibXrayLite'
         latest: true
@@ -36,20 +37,58 @@ jobs:
         out-file-path: '${{ github.workspace }}/V2rayNG/app/libs/'
 
 
-    - name: Decode Keystore
-      env:
-        ENCODED_KEYSTORE: ${{ secrets.KEYSTORE }}
+    - name: 🛠️ Checkout Xray-core repo
+      uses: actions/checkout@v4
+      with:
+        repository: 'GFW-knocker/xray-core'
+        path: 'xray-core'
+        fetch-depth: '0'
+
+    - name: 📚 Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'
+        cache: gradle
+
+    - name: 🐹 Setup Go
+      uses: actions/setup-go@v5
+      with:
+        go-version: 'stable'
+        cache: false
+
+    - name: 📦 Install gomobile
       run: |
-        echo $ENCODED_KEYSTORE | base64 -di > keystore.jks
-    - name: Build Unsiged APK
+        go install golang.org/x/mobile/cmd/gomobile@latest
+        echo "$(go env GOPATH)/bin" >> $GITHUB_PATH
+
+    - name: 📱 Setup Android environment
+      uses: android-actions/setup-android@v3
+
+    - name: 🔑 Get xray short sha
+      run: | 
+        cd xray-core
+        git checkout ${{ inputs.XRAY_VERSION }}
+        echo "XRAY_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
+
+    - name: 🏗️ Build dependencies
+      run: |
+        mkdir ${{ github.workspace }}/build
+        cd ${{ github.workspace }}/build
+        git clone --depth=1 -b main https://github.com/GFW-knocker/AndroidLibXrayLite.git
+        cd AndroidLibXrayLite
+        go get github.com/GFW-knocker/Xray-core@${{ github.event.inputs.XRAY_CORE_VERSION }} || true
+        gomobile init
+        go mod tidy -v
+        gomobile bind -v -androidapi 21 -ldflags='-s -w' ./
+        cp *.aar ${{ github.workspace }}/V2rayNG/app/libs/
+
+    - name: 🏗️ Build APK
       run: |
         cd ${{ github.workspace }}/V2rayNG
         chmod 755 gradlew
-        ./gradlew assembleRelease
-    - name: check filenames
-      run: |
-        cd ${{ github.workspace }}/V2rayNG/app/build/outputs/apk/release/
-        ls
+        ./gradlew assembleDebug
+
     - name: 🔐 Sign APK files
       uses: ilharp/sign-android-release@v1
       with:
@@ -60,19 +99,16 @@ jobs:
         keyPassword: ${{ secrets.SIGNING_KEY_PASSWORD }}
         buildToolsVersion: 34.0.0
 
-
-
-    - name: check filenames
-      run: |
-        cd ${{ github.workspace }}/V2rayNG/app/build/outputs/apk/release/
-        ls
-
-    - name: Upload NikaNG to release
-      uses: svenstaro/upload-release-action@v2
+    - name: 📤 Upload APK
+      uses: actions/upload-artifact@v4
       with:
-        file: ${{ github.workspace }}/V2rayNG/app/build/outputs/apk/release/*signed.apk
-        tag: ${{ github.event.inputs.release_tag }}
-        file_glob: true
+        name: APKs
+        path: V2rayNG/app/build/outputs/apk/release/NikaNG_*-signed.apk
 
-
-    
+    - name: 🚀 Upload APK to Release
+      uses: softprops/action-gh-release@v2
+      with:
+        name: v2rayNG_${{ github.event.inputs.NikaNG_VERSION }}_${{ env.XRAY_SHA }}
+        tag_name: v${{ github.event.inputs.NikaNG_VERSION }}_${{ env.XRAY_SHA }}
+        body: v2rayNG ${{ github.event.inputs.NikaNG_VERSION }} with xray [${{ env.XRAY_SHA }}](https://github.com/GFW-knocker/xray-core/commit/${{ env.XRAY_SHA }})
+        files: V2rayNG/app/build/outputs/apk/release/NikaNG_*-signed.apk
