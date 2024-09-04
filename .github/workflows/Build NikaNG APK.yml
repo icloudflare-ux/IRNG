@@ -102,7 +102,7 @@ jobs:
     - name: 🚀 Upload APK to Release
       uses: softprops/action-gh-release@v2
       with:
-        name: v2rayNG_${{ github.event.inputs.NikaNG_VERSION }}_${{ env.XRAY_SHA }}
+        name: NikaNG_${{ github.event.inputs.NikaNG_VERSION }}_${{ env.XRAY_SHA }}
         tag_name: v${{ github.event.inputs.NikaNG_VERSION }}_${{ env.XRAY_SHA }}
-        body: v2rayNG ${{ github.event.inputs.NikaNG_VERSION }} with xray [${{ env.XRAY_SHA }}](https://github.com/GFW-knocker/xray-core/commit/${{ env.XRAY_SHA }})
+        body: NikaNG ${{ github.event.inputs.NikaNG_VERSION }} with xray [${{ env.XRAY_SHA }}](https://github.com/GFW-knocker/xray-core/commit/${{ env.XRAY_SHA }})
         files: V2rayNG/app/build/outputs/apk/release/NikaNG_*-signed.apk
