@@ -20,7 +20,7 @@ jobs:
       uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
-        java-version: '17'
+        java-version: '22'
 
     
     - name: Setup Android environment
@@ -57,9 +57,9 @@ jobs:
 
 
     - name: Sign app APK
-      uses: r0adkll/sign-android-release@v1    
+      uses: ilharp/sign-android-release@v1    
       # ID used to access action output
-      id: sign_app
+      #id: sign_app
       with:
         releaseDirectory: ${{ github.workspace }}/V2rayNG/app/build/outputs/apk/release/
         signingKeyBase64: ${{ secrets.KEYSTORE }}
