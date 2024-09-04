@@ -70,22 +70,18 @@ jobs:
         echo "XRAY_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
 
     - name: 🏗️ Build dependencies
-      run: |
-        mkdir ${{ github.workspace }}/build
-        cd ${{ github.workspace }}/build
-        git clone --depth=1 -b main https://github.com/GFW-knocker/AndroidLibXrayLite.git
-        cd AndroidLibXrayLite
-        go get github.com/GFW-knocker/Xray-core@${{ github.event.inputs.XRAY_CORE_VERSION }} || true
-        gomobile init
-        go mod tidy -v
-        gomobile bind -v -androidapi 21 -ldflags='-s -w' ./
-        cp *.aar ${{ github.workspace }}/V2rayNG/app/libs/
+      uses: robinraju/release-downloader@v1
+      with:
+        repository: 'GFW-knocker/AndroidLibXrayLite'
+        latest: true
+        fileName: 'libv2ray.aar'
+        out-file-path: '${{ github.workspace }}/V2rayNG/app/libs/'
 
-    - name: 🏗️ Build APK
+    - name: 🏗️ Build Unsiged APK
       run: |
         cd ${{ github.workspace }}/V2rayNG
         chmod 755 gradlew
-        ./gradlew assembleDebug
+        ./gradlew assembleRelease
 
     - name: 🔐 Sign APK files
       uses: ilharp/sign-android-release@v1
