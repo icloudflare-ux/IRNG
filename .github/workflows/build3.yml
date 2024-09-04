@@ -20,7 +20,7 @@ jobs:
       uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
-        java-version: '22'
+        java-version: '17'
 
     
     - name: Setup Android environment
@@ -61,7 +61,7 @@ jobs:
       # ID used to access action output
       #id: sign_app
       with:
-        releaseDirectory: ${{ github.workspace }}/V2rayNG/app/build/outputs/apk/release/
+        releaseDirectory: V2rayNG/app/build/outputs/apk/release/
         signingKeyBase64: ${{ secrets.KEYSTORE }}
         alias: ${{ secrets.ALIAS }}
         keyStorePassword: ${{ secrets.KEY_STORE_PASSWORD }}
