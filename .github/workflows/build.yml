@@ -77,7 +77,7 @@ jobs:
         path: ${{ github.workspace }}/V2rayNG/app/build/outputs/apk/release/*signed.apk
 
         
-    #- name: Upload NikaNG to release
+    #- name: Upload M2rayNG to release
     #  uses: svenstaro/upload-release-action@v2
      # with:
      #   file: ${{ github.workspace }}/V2rayNG/app/build/outputs/apk/release/*signed.apk
