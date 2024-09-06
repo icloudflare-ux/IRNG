@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       NikaNG_VERSION:
-        description: 'M2rayNG version'
+        description: 'IRNG version'
         required: true
 
       XRAY_VERSION:
@@ -21,10 +21,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: 🛠️ Checkout M2rayNG repo
+    - name: 🛠️ Checkout IRNG repo
       uses: actions/checkout@v4
       with:
-        repository: 'icloudflare-ux/M2rayNG'
+        repository: 'icloudflare-ux/IRNG'
 
     - name: download latest Mahsa-core aar
       uses: robinraju/release-downloader@v1
