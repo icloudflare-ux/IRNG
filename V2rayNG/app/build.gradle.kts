@@ -8,10 +8,10 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.MahsaNet.NikaNG"
+        applicationId = "com.MahsaNet.M2rayNG"
         minSdk = 21
         targetSdk = 34
-        versionCode = 583
+        versionCode = 585
         versionName = "1.8.38"
         multiDexEnabled = true
         splits {
@@ -67,7 +67,7 @@ android {
                 else
                     "universal"
 
-                output.outputFileName = "NikaNG_${variant.versionName}_${abi}.apk"
+                output.outputFileName = "M2rayNG_${variant.versionName}_${abi}.apk"
                 if (versionCodes.containsKey(abi)) {
                     output.versionCodeOverride = (1000000 * versionCodes[abi]!!).plus(variant.versionCode)
                 } else {
