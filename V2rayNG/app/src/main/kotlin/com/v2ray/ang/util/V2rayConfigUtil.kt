@@ -184,7 +184,7 @@ object V2rayConfigUtil {
     private fun routing(v2rayConfig: V2rayConfig): Boolean {
         try {
             val routingMode = settingsStorage?.decodeString(AppConfig.PREF_ROUTING_MODE)
-                ?: ERoutingMode.BYPASS_LAN_MAINLAND.value
+                ?: ERoutingMode.BYPASS_LAN.value
 
             routingUserRule(
                 settingsStorage?.decodeString(AppConfig.PREF_V2RAY_ROUTING_BLOCKED)
@@ -453,7 +453,7 @@ object V2rayConfigUtil {
                     .orEmpty()
             )
             val routingMode = settingsStorage?.decodeString(AppConfig.PREF_ROUTING_MODE)
-                ?: ERoutingMode.BYPASS_LAN_MAINLAND.value
+                ?: ERoutingMode.BYPASS_LAN.value
             val isCnRoutingMode =
                 (routingMode == ERoutingMode.BYPASS_MAINLAND.value || routingMode == ERoutingMode.BYPASS_LAN_MAINLAND.value)
             val geoipCn = arrayListOf("geoip:cn")
