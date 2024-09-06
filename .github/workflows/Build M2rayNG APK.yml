@@ -1,4 +1,4 @@
-name: Build NikaNG APK
+name: Build M2rayNG APK
 
 permissions:
   contents: write
@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       NikaNG_VERSION:
-        description: 'NikaNG version'
+        description: 'M2rayNG version'
         required: true
 
       XRAY_VERSION:
@@ -21,10 +21,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: 🛠️ Checkout NikaNG repo
+    - name: 🛠️ Checkout M2rayNG repo
       uses: actions/checkout@v4
       with:
-        repository: 'mahsanet/NikaNG'
+        repository: 'icloudflare-ux/M2rayNG'
 
     - name: download latest Mahsa-core aar
       uses: robinraju/release-downloader@v1
@@ -102,7 +102,7 @@ jobs:
     - name: 🚀 Upload APK to Release
       uses: softprops/action-gh-release@v2
       with:
-        name: NikaNG_${{ github.event.inputs.NikaNG_VERSION }}_${{ env.XRAY_SHA }}
-        tag_name: v${{ github.event.inputs.NikaNG_VERSION }}_${{ env.XRAY_SHA }}
-        body: NikaNG ${{ github.event.inputs.NikaNG_VERSION }} with xray [${{ env.XRAY_SHA }}](https://github.com/GFW-knocker/xray-core/commit/${{ env.XRAY_SHA }})
+        name: M2rayNG_${{ github.event.inputs.M2rayNG_VERSION }}_${{ env.XRAY_SHA }}
+        tag_name: v${{ github.event.inputs.M2rayNG_VERSION }}_${{ env.XRAY_SHA }}
+        body: M2rayNG ${{ github.event.inputs.M2rayNG_VERSION }} with xray [${{ env.XRAY_SHA }}](https://github.com/GFW-knocker/xray-core/commit/${{ env.XRAY_SHA }})
         files: V2rayNG/app/build/outputs/apk/release/NikaNG_*-signed.apk
