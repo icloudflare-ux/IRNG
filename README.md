@@ -1,7 +1,7 @@
 # M2rayNG Pro
 M2rayNG Pro is a v2rayNG build upon [M2rayNG Pro](https://github.com/icloudflare-ux/Xray-core) (xray-core optimized for iran)
 <img src="https://github.com/icloudflare-ux/IRNG/blob/master/M2rayNG.png
-<img src="https://github.com/icloudflare-ux/IRNG/blob/master/M2rayNG.png?raw=true" width="240" ><br>
+<img src="https://github.com/icloudflare-ux/IRNG/blob/master/M2rayNG.jpg?raw=true" width="240" ><br>
 ### features
 - focused on iran firewall compare to M2rayNG Pro
 - ability to use WARP , Wireguard Noise and Fragment utilizing Mahsa-Core
