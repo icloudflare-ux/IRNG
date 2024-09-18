@@ -99,16 +99,16 @@ object AppConfig {
     const val v2rayNGIssues = "https://github.com/icloudflare-ux/IRNG/issues"
     const val v2rayNGWikiMode = "https://github.com/icloudflare-ux/IRNG/wiki/Mode"
     const val v2rayNGPrivacyPolicy = "https://raw.githubusercontent.com/icloudflare-ux/IRNG/master/CR.md"
-    const val PromotionUrl = "aHR0cHM6Ly85LjIzNDQ1Ni54eXovYWJjLmh0bWw="
+    const val PromotionUrl = "aHR0cHM6Ly9naXRodWIuY29tL2ljbG91ZGZsYXJlLXV4L0lSTkc="
     const val GeoUrl = "https://github.com/Chocolate4U/Iran-v2ray-rules/releases/latest/download/"
     const val TgChannelUrl = "https://t.me/icloudflare"
-    const val DelayTestUrl = "https://api.telegram.org/robots.txt"
-    const val DelayTestUrl2 = "https://api.telegram.org/robots.txt"
+    const val DelayTestUrl = "https://cp.cloudflare.com/generate_204"
+    const val DelayTestUrl2 = "https://cp.cloudflare.com/generate_204"
 
     /** DNS server addresses. */
     const val DNS_PROXY = "1.1.1.1"
-    const val DNS_DIRECT = "85.15.1.14"
-    const val DNS_VPN = "1.1.1.1"
+    const val DNS_DIRECT = "1.1.1.2"
+    const val DNS_VPN = "9.9.9.9"
 
     /** Ports and addresses for various services. */
     const val PORT_LOCAL_DNS = "10853"
