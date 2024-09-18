@@ -8,11 +8,11 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.MahsaNet.M2rayNG"
+        applicationId = "com.icloudflare.M2rayNG"
         minSdk = 21
         targetSdk = 34
         versionCode = 585
-        versionName = "1.8.38"
+        versionName = "1.8.39"
         multiDexEnabled = true
         splits {
             abi {
