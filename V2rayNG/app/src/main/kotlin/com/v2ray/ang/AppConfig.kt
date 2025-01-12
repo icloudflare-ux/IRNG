@@ -99,7 +99,7 @@ object AppConfig {
     const val v2rayNGIssues = "https://github.com/icloudflare-ux/IRNG/issues"
     const val v2rayNGWikiMode = "https://github.com/icloudflare-ux/IRNG/wiki/Mode"
     const val v2rayNGPrivacyPolicy = "https://raw.githubusercontent.com/icloudflare-ux/IRNG/master/CR.md"
-    const val PromotionUrl = "aHR0cHM6Ly9naXRodWIuY29tL2ljbG91ZGZsYXJlLXV4L0lSTkc="
+    const val PromotionUrl = "aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL0V2ZXJ5ZGF5LVZQTi9FdmVyeWRheS1WUE4vcmVmcy9oZWFkcy9tYWluL3N1YnNjcmlwdGlvbi9zdXBlci5qc29u="
     const val GeoUrl = "https://github.com/Chocolate4U/Iran-v2ray-rules/releases/latest/download/"
     const val TgChannelUrl = "https://t.me/icloudflare"
     const val DelayTestUrl = "https://www.gstatic.com/generate_204"
