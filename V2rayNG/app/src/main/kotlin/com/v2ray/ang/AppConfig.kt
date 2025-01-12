@@ -102,13 +102,13 @@ object AppConfig {
     const val PromotionUrl = "aHR0cHM6Ly9naXRodWIuY29tL2ljbG91ZGZsYXJlLXV4L0lSTkc="
     const val GeoUrl = "https://github.com/Chocolate4U/Iran-v2ray-rules/releases/latest/download/"
     const val TgChannelUrl = "https://t.me/icloudflare"
-    const val DelayTestUrl = "https://cp.cloudflare.com/generate_204"
-    const val DelayTestUrl2 = "https://cp.cloudflare.com/generate_204"
+    const val DelayTestUrl = "https://www.gstatic.com/generate_204"
+    const val DelayTestUrl2 = "https://www.gstatic.com/generate_204"
 
     /** DNS server addresses. */
     const val DNS_PROXY = "1.1.1.1"
     const val DNS_DIRECT = "1.1.1.2"
-    const val DNS_VPN = "9.9.9.9"
+    const val DNS_VPN = "1.1.1.1"
 
     /** Ports and addresses for various services. */
     const val PORT_LOCAL_DNS = "10853"
@@ -116,7 +116,7 @@ object AppConfig {
     const val PORT_HTTP = "10809"
     const val WIREGUARD_LOCAL_ADDRESS_V4 = "172.16.0.2/32"
     const val WIREGUARD_LOCAL_ADDRESS_V6 = "2606:4700:110:8f81:d551:a0:532e:a2b3/128"
-    const val WIREGUARD_LOCAL_MTU = "1420"
+    const val WIREGUARD_LOCAL_MTU = "1280"
   
 
     const val WIREGUARD_keep_alive = "5"
