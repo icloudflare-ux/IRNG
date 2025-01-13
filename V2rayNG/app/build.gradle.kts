@@ -12,7 +12,7 @@ android {
         minSdk = 21
         targetSdk = 34
         versionCode = 585
-        versionName = "1.8.40"
+        versionName = "1.8.41"
         multiDexEnabled = true
         splits {
             abi {
